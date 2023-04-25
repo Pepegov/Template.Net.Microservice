@@ -1,0 +1,24 @@
+{
+  "IdentityServerUrl": {
+    "Audience": "https://localhost:10001/resources",
+    "Authority": "https://localhost:10001"
+  },
+  
+  "CurrentIdentityClient": {
+    "Name" : "Microservice.Identity",
+    "Id" : "Microservice.Identity-4523f-21321",
+    "Secret": "Microservice.Identity-4523f-21321_21354g",
+    "ConsentType" : "implicit",
+    "GrandTypes": [
+      "refresh_token",
+      "authorization_code",
+      "client_credentials",
+      "password"
+    ],
+    "Scopes": [
+      "Microservice.Profile",
+      "profile",
+      "openid"
+    ]
+  }
+}

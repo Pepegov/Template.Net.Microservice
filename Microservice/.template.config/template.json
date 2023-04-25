@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Pepegov",
+    "classifications": [ "Common", "Web" ],
+    "identity": "Microservice.Template",
+    "name": "Microservice Template",
+    "shortName": "microservicetemplate",
+    "tags": {
+      "language": "C#",
+      "type": "project"
+    },
+    "sourceName": "MicroserviceTemplate",
+    "preferNameDirectory": true
+}
