@@ -9,11 +9,6 @@
 */.idea
 **/.idea
 
-# secrets
-
-**/appsettings.Development.json
-appsettings.Development.json
-
 # dotsetting
 MicroserviceOpenIddictTemplate.sln.DotSettings.user
 *.DotSettings.user
