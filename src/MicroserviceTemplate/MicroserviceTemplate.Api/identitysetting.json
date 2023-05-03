@@ -5,8 +5,8 @@
   
   "CurrentIdentityClient": {
     "Name" : "Microservice.Identity",
-    "Id" : "Microservice.Identity-4523f-21321",
-    "Secret": "Microservice.Identity-4523f-21321_21354g",
+    "Id" : "Microservice.Identity-ID",
+    "Secret": "Microservice.Identity-SECRET",
     "ConsentType" : "implicit",
     "GrandTypes": [
       "refresh_token",
@@ -17,7 +17,8 @@
     "Scopes": [
       "Microservice.Profile",
       "profile",
-      "openid"
+      "openid",
+      "offline_access"
     ]
   }
 }
