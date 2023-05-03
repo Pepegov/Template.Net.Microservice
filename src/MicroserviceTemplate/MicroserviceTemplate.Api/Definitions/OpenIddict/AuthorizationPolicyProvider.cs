@@ -1,5 +1,4 @@
-﻿using Calabonga.Microservice.Module.Web.Definitions.OpenIddict;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 
 namespace MicroserviceTemplate.Api.Definitions.OpenIddict;

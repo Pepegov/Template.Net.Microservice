@@ -1,5 +1,4 @@
 ﻿using System.Security.Claims;
-using Calabonga.Microservice.Module.Web.Definitions.OpenIddict;
 using Microsoft.AspNetCore.Authorization;
 using Pepegov.MicroserviceFramerwork.Helpers;
 

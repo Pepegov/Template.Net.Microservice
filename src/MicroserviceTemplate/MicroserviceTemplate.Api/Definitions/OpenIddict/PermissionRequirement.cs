@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace Calabonga.Microservice.Module.Web.Definitions.OpenIddict;
+namespace MicroserviceTemplate.Api.Definitions.OpenIddict;
 
 /// <summary>
 /// Permission requirement for user or service authorization

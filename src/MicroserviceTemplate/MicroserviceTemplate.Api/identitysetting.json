@@ -1,6 +1,5 @@
 {
   "IdentityServerUrl": {
-    "Audience": "https://localhost:10001/resources",
     "Authority": "https://localhost:10001"
   },
   

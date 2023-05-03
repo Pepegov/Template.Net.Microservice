@@ -17,12 +17,8 @@ try
     var builder = WebApplication.CreateBuilder(args);
     
     //Host logging  
-    var serilogConfiguration = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("serilogsetting.json")
-        .Build();
     builder.Host.UseSerilog((context, configuration) =>
-        configuration.ReadFrom.Configuration(serilogConfiguration));
+        configuration.ReadFrom.Configuration(context.Configuration));
     
     //Add definitions
     builder.Services.AddDefinitions(builder, typeof(Program));

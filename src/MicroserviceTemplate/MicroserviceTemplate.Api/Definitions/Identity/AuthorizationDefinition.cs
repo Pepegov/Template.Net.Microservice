@@ -18,10 +18,10 @@ public class AuthorizationDefinition : Definition
 
     public override void ConfigureServicesAsync(IServiceCollection services, WebApplicationBuilder builder)
     {
-        var configurationBuilder = new ConfigurationBuilder()
+        var identityConfiguration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("identitysetting.json");
-        IConfiguration identityConfiguration = configurationBuilder.Build();
+            .AddJsonFile(AppData.IdentitySettingPath)
+            .Build();
         
         var url = identityConfiguration.GetSection("IdentityServerUrl").GetValue<string>("Authority");
         var currentClient = identityConfiguration.GetSection("CurrentIdentityClient").Get<IdentityClientOption>()!;

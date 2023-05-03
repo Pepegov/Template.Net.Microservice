@@ -78,7 +78,7 @@ public class SwaggerDefinition : Definition
             
             var identityConfiguration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("identitysetting.json")
+                .AddJsonFile(AppData.IdentitySettingPath)
                 .Build();
             
             var url = identityConfiguration.GetSection("IdentityServerUrl").GetValue<string>("Authority");
