@@ -23,7 +23,7 @@ public static class AppData
     /// <summary>
     /// Current service version
     /// </summary>
-    public const string ServiceVersion = "f7v1";
+    public const string ServiceVersion = "f7v1.0.0";
 
     /// <summary>
     /// Path to identitysetting.json

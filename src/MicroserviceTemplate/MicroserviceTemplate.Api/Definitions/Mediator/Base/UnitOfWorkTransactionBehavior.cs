@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Pepegov.MicroserviceFramerwork.Patterns.UnitOfWork;
+using Pepegov.UnitOfWork.EntityFramework;
 
 namespace MicroserviceTemplate.Api.Definitions.Mediator.Base;
 
@@ -11,9 +11,9 @@ namespace MicroserviceTemplate.Api.Definitions.Mediator.Base;
 public class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IUnitOfWorkEF _unitOfWork;
 
-    public TransactionBehavior(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
+    public TransactionBehavior(IUnitOfWorkEF unitOfWork) => _unitOfWork = unitOfWork;
 
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)

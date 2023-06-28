@@ -1,6 +1,6 @@
 using AutoMapper;
-using Pepegov.MicroserviceFramerwork.Patterns.Entityes;
-using Pepegov.MicroserviceFramerwork.Patterns.Reposytory;
+using Pepegov.UnitOfWork.Entityes;
+using Pepegov.UnitOfWork.EntityFramework.Repository;
 
 namespace MicroserviceTemplate.Api.Definitions.Mapping;
 

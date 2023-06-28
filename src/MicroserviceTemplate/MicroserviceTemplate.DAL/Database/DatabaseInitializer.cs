@@ -16,7 +16,7 @@ namespace MicroserviceTemplate.DAL.Database
         public async Task Seed()
         {
             await _context!.Database.EnsureCreatedAsync();
-            var pending = await _context.Database.GetPendingMigrationsAsync(); //Асинхронно получает все миграции, определенные в сборке, но не примененные к целевой базе данных.
+            var pending = await _context.Database.GetPendingMigrationsAsync(); 
             if (pending.Any())
             {
                 await _context!.Database.MigrateAsync();

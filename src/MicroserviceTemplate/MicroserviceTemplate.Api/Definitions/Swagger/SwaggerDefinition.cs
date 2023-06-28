@@ -46,11 +46,12 @@ public class SwaggerDefinition : Definition
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(options =>
         {
+            var now = DateTime.Now.ToString("f");
             options.SwaggerDoc("v1", new OpenApiInfo
             {
                 Title = AppData.ServiceName,
                 Version = AppData.ServiceVersion,
-                Description = AppData.ServiceDescription
+                Description = AppData.ServiceDescription + $" | Upload time: {now}"
             });
 
             options.ResolveConflictingActions(x => x.First());

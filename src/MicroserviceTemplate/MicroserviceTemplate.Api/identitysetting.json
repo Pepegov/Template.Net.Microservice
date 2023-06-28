@@ -15,7 +15,6 @@
       "password"
     ],
     "Scopes": [
-      "Microservice.Profile",
       "profile",
       "openid",
       "offline_access"

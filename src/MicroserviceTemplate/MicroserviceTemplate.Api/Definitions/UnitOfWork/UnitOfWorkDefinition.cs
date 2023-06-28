@@ -1,6 +1,6 @@
 ﻿using MicroserviceTemplate.DAL.Database;
 using Pepegov.MicroserviceFramerwork.AspNetCore.Definition;
-using Pepegov.MicroserviceFramerwork.Patterns.UnitOfWork;
+using Pepegov.UnitOfWork.EntityFramework;
 
 namespace MicroserviceTemplate.Api.Definitions.UnitOfWork
 {
@@ -8,7 +8,7 @@ namespace MicroserviceTemplate.Api.Definitions.UnitOfWork
     {
         public override void ConfigureServicesAsync(IServiceCollection services, WebApplicationBuilder builder)
         {
-            services.AddUnitOfWork<ApplicationDbContext>();
+            services.AddUnitOfWorkEF<ApplicationDbContext>();
         }
     }
 }
