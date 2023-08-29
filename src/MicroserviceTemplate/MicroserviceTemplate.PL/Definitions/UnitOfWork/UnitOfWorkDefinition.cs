@@ -15,6 +15,7 @@ namespace MicroserviceTemplate.PL.Definitions.UnitOfWork
                 {
                     configurator.DatabaseContext<ApplicationDbContext>();
                 });
-            });        }
+            });        
+        }
     }
 }

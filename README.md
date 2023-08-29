@@ -16,17 +16,23 @@ To install a template for your device via dotnet:
 
 1. Go to the directory with the desired template
     ```bash
-    cd OpenIddictService/Service
+    cd MicroserviceExtension/src
     ```
 2. Perform the installation
     ```bash
     dotnet new --install .
     ```
 
+You can also reinstall the template if it was installed earlier
+
+```bash
+dotnet new install --force .
+```
+
 To install a template for your device via dotnet:
 
 1. Go to File => New Solution... => More Templates => Install Template...
-2. Select folder with .sln file (OpenIddict/Service/OpenIddictServiceTemplate)
+2. Select folder with .sln file (MicroserviceExtension/src/MicroserviceTemplate)
 
 <br>
 
