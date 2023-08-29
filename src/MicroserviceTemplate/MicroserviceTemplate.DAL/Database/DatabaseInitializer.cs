@@ -13,13 +13,23 @@ namespace MicroserviceTemplate.DAL.Database
             _context = context;
         }
         
-        public async Task Seed()
+        public async Task SeedAsync()
         {
             await _context!.Database.EnsureCreatedAsync();
             var pending = await _context.Database.GetPendingMigrationsAsync(); 
             if (pending.Any())
             {
                 await _context!.Database.MigrateAsync();
+            }
+        }
+        
+        public void Seed()
+        {
+            _context!.Database.EnsureCreated();
+            var pending = _context.Database.GetPendingMigrations(); 
+            if (pending.Any())
+            {
+                _context!.Database.Migrate();
             }
         }
     }
