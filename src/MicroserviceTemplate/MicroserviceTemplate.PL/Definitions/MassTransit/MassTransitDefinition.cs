@@ -1,24 +1,25 @@
 using System.Reflection;
 using MassTransit;
 using MicroserviceTemplate.PL.Definitions.Options.Models;
-using Pepegov.MicroserviceFramerwork.AspNetCore.Definition;
-using Pepegov.MicroserviceFramerwork.Exceptions;
+using Pepegov.MicroserviceFramework.Definition;
+using Pepegov.MicroserviceFramework.Definition.Context;
+using Pepegov.MicroserviceFramework.Exceptions;
 
 namespace MicroserviceTemplate.PL.Definitions.MassTransit;
 
-public class MassTransitDefinition : Definition
+public class MassTransitDefinition : ApplicationDefinition
 {
-    public override bool Enabled => false;
+    public override bool Enabled => false; //TODO: set "true" value or remove this line for enable this definition if you need
 
-    public override void ConfigureServicesAsync(IServiceCollection services, WebApplicationBuilder builder)
+    public override async Task ConfigureServicesAsync(IDefinitionServiceContext context)
     {
-        services.AddMassTransit(x =>
+        context.ServiceCollection.AddMassTransit(x =>
         {
             x.SetKebabCaseEndpointNameFormatter();
             x.SetInMemorySagaRepositoryProvider();
             
             var assembly = Assembly.GetEntryAssembly();
-            var setting = builder.Configuration.GetSection("RabbitMQ").Get<MassTransitOption>();
+            var setting = context.Configuration.GetSection("RabbitMQ").Get<MassTransitOption>();
             if (setting is null)
             {
                 throw new MicroserviceArgumentNullException("MassTransit setting is null");

@@ -1,19 +1,20 @@
 ﻿using MicroserviceTemplate.DAL.Domain;
 using MicroserviceTemplate.PL.Definitions.Options.Models;
-using Pepegov.MicroserviceFramerwork.AspNetCore.Definition;
+using Pepegov.MicroserviceFramework.Definition;
+using Pepegov.MicroserviceFramework.Definition.Context;
 
 namespace MicroserviceTemplate.PL.Definitions.Options;
 
-public class OptionsDefinition : Definition
+public class OptionsDefinition : ApplicationDefinition
 {
-    public override void ConfigureServicesAsync(IServiceCollection services, WebApplicationBuilder builder)
+    public override async Task ConfigureServicesAsync(IDefinitionServiceContext context)
     {
         var identityConfiguration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile(AppData.IdentitySettingPath)
             .Build();
         
-        services.Configure<IdentityAddressOption>(identityConfiguration.GetSection("IdentityServerUrl"));
-        services.Configure<IdentityClientOption>(identityConfiguration.GetSection("CurrentIdentityClient"));
+        context.ServiceCollection.Configure<IdentityAddressOption>(identityConfiguration.GetSection("IdentityServerUrl"));
+        context.ServiceCollection.Configure<IdentityClientOption>(identityConfiguration.GetSection("CurrentIdentityClient"));
     }
 }

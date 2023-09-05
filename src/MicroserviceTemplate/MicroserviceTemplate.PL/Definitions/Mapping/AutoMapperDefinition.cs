@@ -1,16 +1,20 @@
-using Pepegov.MicroserviceFramerwork.AspNetCore.Definition;
+using Pepegov.MicroserviceFramework.AspNetCore.WebApplicationDefinition;
+using Pepegov.MicroserviceFramework.Definition;
+using Pepegov.MicroserviceFramework.Definition.Context;
 
 namespace MicroserviceTemplate.PL.Definitions.Mapping;
 
-public class AutoMapperDefinition : Definition
+public class AutoMapperDefinition : ApplicationDefinition
 { 
-    public override void ConfigureServicesAsync(IServiceCollection services, WebApplicationBuilder builder)
-        => services.AddAutoMapper(typeof(Program));
+    public override async Task ConfigureServicesAsync(IDefinitionServiceContext context)
+        => context.ServiceCollection.AddAutoMapper(typeof(Program));
     
-    public override void ConfigureApplicationAsync(WebApplication app)
+    public override async Task ConfigureApplicationAsync(IDefinitionApplicationContext context)
     {
-        var mapper = app.Services.GetRequiredService<AutoMapper.IConfigurationProvider>();
-        if (app.Environment.IsDevelopment())
+        var webContext = context.Parse<WebDefinitionApplicationContext>();
+        
+        var mapper = webContext.ServiceProvider.GetRequiredService<AutoMapper.IConfigurationProvider>();
+        if (webContext.WebApplication.Environment.IsDevelopment())
         {
             mapper.AssertConfigurationIsValid();
         }

@@ -1,18 +1,23 @@
-using Pepegov.MicroserviceFramerwork.AspNetCore.Definition;
-using Pepegov.MicroserviceFramerwork.AspNetCore.Filters;
-using Pepegov.MicroserviceFramerwork.AspNetCore.Middleware;
+using Microsoft.AspNetCore.Diagnostics;
+using Pepegov.MicroserviceFramework.AspNetCore.Infrastructure.Filter;
+using Pepegov.MicroserviceFramework.AspNetCore.WebApplicationDefinition;
+using Pepegov.MicroserviceFramework.Definition;
+using Pepegov.MicroserviceFramework.Definition.Context;
 
 namespace MicroserviceTemplate.PL.Definitions.ExceptionHandler;
 
-public class ExceptionHandlerDefinition : Definition
+public class ExceptionHandlerDefinition : ApplicationDefinition
 {
-    public override void ConfigureServicesAsync(IServiceCollection services, WebApplicationBuilder builder)
+    public override bool Enabled => false;
+
+    public override async Task ConfigureServicesAsync(IDefinitionServiceContext context)
     {
-        services.AddMvc(options => options.Filters.Add<GlobalExceptionFilter>());
+        context.ServiceCollection.AddMvc(options => options.Filters.Add<GlobalExceptionFilter>());
     }
 
-    public override void ConfigureApplicationAsync(WebApplication app)
+    public override async Task ConfigureApplicationAsync(IDefinitionApplicationContext context)
     {
-        app.UseMiddleware<ExceptionHandlerMiddleware>();
+        var webContext = context.Parse<WebDefinitionApplicationContext>();
+        webContext.WebApplication.UseMiddleware<ExceptionHandlerMiddleware>();
     }
 }

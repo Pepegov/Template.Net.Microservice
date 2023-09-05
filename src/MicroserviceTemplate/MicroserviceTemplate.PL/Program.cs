@@ -1,5 +1,5 @@
 using Microsoft.IdentityModel.Logging;
-using Pepegov.MicroserviceFramerwork.AspNetCore.Definition;
+using Pepegov.MicroserviceFramework.AspNetCore.WebApplicationDefinition;
 using Serilog;
 using Serilog.Events;
 
@@ -21,13 +21,14 @@ try
         configuration.ReadFrom.Configuration(context.Configuration));
     
     //Add definitions
-    builder.Services.AddDefinitions(builder, typeof(Program));
+    var assembly = typeof(Program).Assembly;
+    builder.AddApplicationDefinitions(assembly);
 
     //Create web application
     var app = builder.Build();
     
     //Use definitions
-    app.UseDefinitions();
+    app.UseApplicationDefinitions();
     
     //Use logging
     if (app.Environment.IsDevelopment())

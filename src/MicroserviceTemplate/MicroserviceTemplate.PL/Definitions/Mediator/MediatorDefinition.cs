@@ -1,15 +1,15 @@
-﻿using Pepegov.MicroserviceFramerwork.AspNetCore.Definition;
+﻿using Pepegov.MicroserviceFramework.Definition;
+using Pepegov.MicroserviceFramework.Definition.Context;
 
 namespace MicroserviceTemplate.PL.Definitions.Mediator;
 
 /// <summary>
 /// Register Mediator as application definition
 /// </summary>
-public class MediatorDefinition : Definition
+public class MediatorDefinition : ApplicationDefinition
 {
-    public override void ConfigureServicesAsync(IServiceCollection services, WebApplicationBuilder builder)
+    public override async Task ConfigureServicesAsync(IDefinitionServiceContext context)
     {
-        //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorBehavior<,>));
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+        context.ServiceCollection.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
     }
 }

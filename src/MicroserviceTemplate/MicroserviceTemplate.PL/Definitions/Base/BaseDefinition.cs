@@ -1,19 +1,24 @@
-﻿using Pepegov.MicroserviceFramerwork.AspNetCore.Definition;
+﻿using Pepegov.MicroserviceFramework.AspNetCore.WebApplicationDefinition;
+using Pepegov.MicroserviceFramework.Definition;
+using Pepegov.MicroserviceFramework.Definition.Context;
 
 namespace MicroserviceTemplate.PL.Definitions.Base;
 
 /// <summary>
 /// AspNetCore common configuration
 /// </summary>
-public class CommonDefinition : Definition
+public class CommonDefinition : ApplicationDefinition
 {
-    public override void ConfigureApplicationAsync(WebApplication app)
-        => app.UseHttpsRedirection();
-
-    public override void ConfigureServicesAsync(IServiceCollection services, WebApplicationBuilder builder)
+    public override async Task ConfigureApplicationAsync(IDefinitionApplicationContext context)
     {
-        services.AddLocalization();
-        services.AddHttpContextAccessor();
-        services.AddResponseCaching();
+        var webContext = context.Parse<WebDefinitionApplicationContext>();
+        webContext.WebApplication.UseHttpsRedirection();
+    }
+
+    public override async Task ConfigureServicesAsync(IDefinitionServiceContext context)
+    {
+        context.ServiceCollection.AddLocalization();
+        context.ServiceCollection.AddHttpContextAccessor();
+        context.ServiceCollection.AddResponseCaching();
     }
 }

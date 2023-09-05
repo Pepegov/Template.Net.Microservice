@@ -1,23 +1,24 @@
 ﻿using MicroserviceTemplate.DAL.Domain;
-using Pepegov.MicroserviceFramerwork.AspNetCore.Definition;
+using Pepegov.MicroserviceFramework.Definition;
+using Pepegov.MicroserviceFramework.Definition.Context;
 
 namespace MicroserviceTemplate.PL.Definitions.Cors;
 
 /// <summary>
 /// Cors configurations
 /// </summary>
-public class CorsDefinition : Definition
+public class CorsDefinition : ApplicationDefinition
 {
-    public override void ConfigureServicesAsync(IServiceCollection services, WebApplicationBuilder builder)
+    public override async Task ConfigureServicesAsync(IDefinitionServiceContext context)
     {
-        var origins = builder.Configuration.GetSection("Cors")?.GetSection("Origins")?.Value?.Split(',');
-        services.AddCors(options =>
+        var origins = context.Configuration.GetSection("Cors")?.GetSection("Origins")?.Value?.Split(',');
+        context.ServiceCollection.AddCors(options =>
         {
             options.AddPolicy(AppData.PolicyName, builder =>
             {
                 builder.AllowAnyHeader();
                 builder.AllowAnyMethod();
-                if (origins is not {Length: > 0})
+                if (origins is not { Length: > 0 })
                 {
                     return;
                 }

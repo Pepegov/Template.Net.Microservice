@@ -6,17 +6,18 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using OpenIddict.Server.AspNetCore;
-using Pepegov.MicroserviceFramerwork.AspNetCore.Definition;
+using Pepegov.MicroserviceFramework.AspNetCore.WebApplicationDefinition;
+using Pepegov.MicroserviceFramework.Definition;
+using Pepegov.MicroserviceFramework.Definition.Context;
 
 namespace MicroserviceTemplate.PL.Definitions.Identity;
 
 /// <summary>
 /// Authorization Policy registration
 /// </summary>
-public class AuthorizationDefinition : Definition
+public class AuthorizationDefinition : ApplicationDefinition
 {
-
-    public override void ConfigureServicesAsync(IServiceCollection services, WebApplicationBuilder builder)
+    public override async Task ConfigureServicesAsync(IDefinitionServiceContext context)
     {
         var identityConfiguration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
@@ -26,7 +27,7 @@ public class AuthorizationDefinition : Definition
         var url = identityConfiguration.GetSection("IdentityServerUrl").GetValue<string>("Authority");
         var currentClient = identityConfiguration.GetSection("CurrentIdentityClient").Get<IdentityClientOption>()!;
         
-        services
+        context.ServiceCollection
             .AddAuthentication(options =>
             {
                 options.DefaultScheme = OpenIddictServerAspNetCoreDefaults.AuthenticationScheme;
@@ -80,7 +81,7 @@ public class AuthorizationDefinition : Definition
                 };
             });
 
-        services.AddAuthorization(options =>
+        context.ServiceCollection.AddAuthorization(options =>
         {
             options.AddPolicy(AuthData.AuthenticationSchemes, policy =>
             {
@@ -89,18 +90,20 @@ public class AuthorizationDefinition : Definition
             });
         });
 
-        services.AddSingleton<IAuthorizationPolicyProvider, AuthorizationPolicyProvider>();
-        services.AddSingleton<IAuthorizationHandler, AppPermissionHandler>();
+        context.ServiceCollection.AddSingleton<IAuthorizationPolicyProvider, AuthorizationPolicyProvider>();
+        context.ServiceCollection.AddSingleton<IAuthorizationHandler, AppPermissionHandler>();
     }
     
-    public override void ConfigureApplicationAsync(WebApplication app)
+    public override async Task ConfigureApplicationAsync(IDefinitionApplicationContext context)
     {
-        app.UseRouting();
-        app.UseCors(AppData.PolicyName);
-        app.UseAuthentication();
-        app.UseAuthorization();
+        var webContext = context.Parse<WebDefinitionApplicationContext>();
+        
+        webContext.WebApplication.UseRouting();
+        webContext.WebApplication.UseCors(AppData.PolicyName);
+        webContext.WebApplication.UseAuthentication();
+        webContext.WebApplication.UseAuthorization();
 
         // registering UserIdentity helper as singleton
-        UserIdentity.Instance.Configure(app.Services.GetService<IHttpContextAccessor>()!);
+        UserIdentity.Instance.Configure(webContext.WebApplication.Services.GetService<IHttpContextAccessor>()!);
     }
 }

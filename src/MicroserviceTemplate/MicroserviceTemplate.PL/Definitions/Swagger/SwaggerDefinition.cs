@@ -3,8 +3,10 @@ using MicroserviceTemplate.PL.Definitions.Options.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using Pepegov.MicroserviceFramerwork.AspNetCore.Definition;
-using Pepegov.MicroserviceFramerwork.Attributes;
+using Pepegov.MicroserviceFramework.AspNetCore.WebApplicationDefinition;
+using Pepegov.MicroserviceFramework.Definition;
+using Pepegov.MicroserviceFramework.Definition.Context;
+using Pepegov.MicroserviceFramework.Infrastructure.Attributes;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace MicroserviceTemplate.PL.Definitions.Swagger;
@@ -12,22 +14,23 @@ namespace MicroserviceTemplate.PL.Definitions.Swagger;
 /// <summary>
 /// Swagger definition for application
 /// </summary>
-public class SwaggerDefinition : Definition
+public class SwaggerDefinition : ApplicationDefinition
 {
-    
-    public override void ConfigureApplicationAsync(WebApplication app)
+    public override async Task ConfigureApplicationAsync(IDefinitionApplicationContext context)
     {
-        if (!app.Environment.IsDevelopment())
+        var webContext = context.Parse<WebDefinitionApplicationContext>();
+        
+        if (!webContext.WebApplication.Environment.IsDevelopment())
         {
             return;
         }
 
-        using var scope = app.Services.CreateAsyncScope();
+        using var scope = webContext.WebApplication.Services.CreateAsyncScope();
         var client = scope.ServiceProvider.GetService<IOptions<IdentityClientOption>>()!.Value;
 
         
-        app.UseSwagger();
-        app.UseSwaggerUI(settings =>
+        webContext.WebApplication.UseSwagger();
+        webContext.WebApplication.UseSwaggerUI(settings =>
         {
             settings.DefaultModelExpandDepth(0);
             settings.DefaultModelRendering(ModelRendering.Model);
@@ -40,11 +43,11 @@ public class SwaggerDefinition : Definition
         });
     }
 
-    public override void ConfigureServicesAsync(IServiceCollection services, WebApplicationBuilder builder)
+    public override async Task ConfigureServicesAsync(IDefinitionServiceContext context)
     {
-        services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen(options =>
+        context.ServiceCollection.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
+        context.ServiceCollection.AddEndpointsApiExplorer();
+        context.ServiceCollection.AddSwaggerGen(options =>
         {
             var now = DateTime.Now.ToString("f");
             options.SwaggerDoc("v1", new OpenApiInfo

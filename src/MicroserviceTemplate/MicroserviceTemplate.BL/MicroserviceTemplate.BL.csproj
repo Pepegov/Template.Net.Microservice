@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MassTransit" Version="8.1.0" />
+      <PackageReference Include="Pepegov.MicroserviceFramework" Version="2.1.1" />
+    </ItemGroup>
+
 </Project>

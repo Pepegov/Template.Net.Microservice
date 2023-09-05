@@ -2,17 +2,20 @@ using System.Security.Claims;
 using MicroserviceTemplate.DAL.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Pepegov.MicroserviceFramerwork.AspNetCore.Definition;
-using Pepegov.MicroserviceFramerwork.Attributes;
+using Pepegov.MicroserviceFramework.AspNetCore.WebApplicationDefinition;
+using Pepegov.MicroserviceFramework.Definition;
+using Pepegov.MicroserviceFramework.Definition.Context;
+using Pepegov.MicroserviceFramework.Infrastructure.Attributes;
 using Serilog;
 
 namespace MicroserviceTemplate.PL.EndPoints.Claims;
 
-public class ClaimsEndPoint : Definition
+public class ClaimsEndPoint : ApplicationDefinition
 {
-    public override void ConfigureApplicationAsync(WebApplication app)
+    public override async Task ConfigureApplicationAsync(IDefinitionApplicationContext context)
     {
-        app.MapGet("~/api/claims/get", GetClaims).WithOpenApi();
+        var webContext = context.Parse<WebDefinitionApplicationContext>();
+        webContext.WebApplication.MapGet("~/api/claims/get", GetClaims).WithOpenApi();
     }
     
     [ProducesResponseType(200)]

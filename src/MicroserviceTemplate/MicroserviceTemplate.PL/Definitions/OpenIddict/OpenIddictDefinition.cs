@@ -1,11 +1,12 @@
-﻿using Pepegov.MicroserviceFramerwork.AspNetCore.Definition;
+﻿using Pepegov.MicroserviceFramework.Definition;
+using Pepegov.MicroserviceFramework.Definition.Context;
 
 namespace MicroserviceTemplate.PL.Definitions.OpenIddict;
 
-public class OpenIddictDefinition : Definition
+public class OpenIddictDefinition : ApplicationDefinition
 {
-    public override void ConfigureServicesAsync(IServiceCollection services, WebApplicationBuilder builder) => 
-        services
+    public override async Task ConfigureServicesAsync(IDefinitionServiceContext context) => 
+        context.ServiceCollection
             .AddOpenIddict()
             .AddValidation(options =>
             {

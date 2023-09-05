@@ -1,15 +1,16 @@
 ﻿using MicroserviceTemplate.DAL.Database;
-using Pepegov.MicroserviceFramerwork.AspNetCore.Definition;
+using Pepegov.MicroserviceFramework.Definition;
+using Pepegov.MicroserviceFramework.Definition.Context;
 using Pepegov.UnitOfWork;
 using Pepegov.UnitOfWork.EntityFramework.Configuration;
 
 namespace MicroserviceTemplate.PL.Definitions.UnitOfWork
 {
-    public class UnitOfWorkDefinition : Definition
+    public class UnitOfWorkDefinition : ApplicationDefinition
     {
-        public override void ConfigureServicesAsync(IServiceCollection services, WebApplicationBuilder builder)
+        public override async Task ConfigureServicesAsync(IDefinitionServiceContext serviceContext)
         {
-            services.AddUnitOfWork(x =>
+            serviceContext.ServiceCollection.AddUnitOfWork(x =>
             {
                 x.UsingEntityFramework((context, configurator) =>
                 {

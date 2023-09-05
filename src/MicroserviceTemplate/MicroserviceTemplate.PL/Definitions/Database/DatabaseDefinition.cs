@@ -2,19 +2,20 @@
 using MicroserviceTemplate.DAL.Database;
 using MicroserviceTemplate.DAL.Domain;
 using Microsoft.EntityFrameworkCore;
-using Pepegov.MicroserviceFramerwork.AspNetCore.Definition;
+using Pepegov.MicroserviceFramework.Definition;
+using Pepegov.MicroserviceFramework.Definition.Context;
 
 namespace MicroserviceTemplate.PL.Definitions.Database
 {
-    public class DatabaseDefinition : Definition
+    public class DatabaseDefinition : ApplicationDefinition
     {
-        public override void ConfigureServicesAsync(IServiceCollection services, WebApplicationBuilder builder)
+        public override async Task ConfigureServicesAsync(IDefinitionServiceContext context)
         {
             string migrationsAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name!;
-            string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+            string connectionString = context.Configuration.GetConnectionString("DefaultConnection")
                 ?? $"Server=localhost;Port=5432;User Id=postgres;Password=password;Database={AppData.ServiceName}";
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            context.ServiceCollection.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(connectionString,
                 b => b.MigrationsAssembly(migrationsAssembly)));
         }
