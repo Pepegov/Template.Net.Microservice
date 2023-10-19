@@ -12,14 +12,14 @@
         <PackageReference Include="MassTransit" Version="8.1.0" />
         <PackageReference Include="MassTransit.RabbitMQ" Version="8.1.0" />
         <PackageReference Include="MediatR" Version="12.1.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.12" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.8" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
         <PackageReference Include="OpenIddict.AspNetCore" Version="4.5.0" />
         <PackageReference Include="Pepegov.MicroserviceFramework" Version="2.1.1" />
-        <PackageReference Include="Pepegov.MicroserviceFramework.ApiResults" Version="1.0.0" />
-        <PackageReference Include="Pepegov.MicroserviceFramework.AspNetCore" Version="2.1.1" />
-        <PackageReference Include="Pepegov.UnitOfWork" Version="3.0.2" />
+        <PackageReference Include="Pepegov.MicroserviceFramework.ApiResults" Version="1.0.2" />
+        <PackageReference Include="Pepegov.MicroserviceFramework.AspNetCore" Version="2.1.6" />
+        <PackageReference Include="Pepegov.UnitOfWork" Version="3.0.4" />
         <PackageReference Include="Pepegov.UnitOfWork.EntityFramework" Version="1.1.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
         <PackageReference Include="Serilog.Formatting.Compact" Version="1.1.0" />
