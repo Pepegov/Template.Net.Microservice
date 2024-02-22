@@ -16,6 +16,7 @@ namespace MicroserviceTemplate.PL.Definitions.Database
                 ?? $"Server=localhost;Port=5432;User Id=postgres;Password=password;Database={AppData.ServiceName}";
 
             context.ServiceCollection.AddDbContext<ApplicationDbContext>(options =>
+            //TODO: change your db provider 
             options.UseNpgsql(connectionString,
                 b => b.MigrationsAssembly(migrationsAssembly)));
         }

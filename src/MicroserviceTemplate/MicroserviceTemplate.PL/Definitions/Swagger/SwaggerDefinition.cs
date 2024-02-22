@@ -20,11 +20,6 @@ public class SwaggerDefinition : ApplicationDefinition
     {
         var webContext = context.Parse<WebDefinitionApplicationContext>();
         
-        if (!webContext.WebApplication.Environment.IsDevelopment())
-        {
-            return;
-        }
-
         using var scope = webContext.WebApplication.Services.CreateAsyncScope();
         var client = scope.ServiceProvider.GetService<IOptions<IdentityClientOption>>()!.Value;
 
@@ -80,13 +75,8 @@ public class SwaggerDefinition : ApplicationDefinition
                 return tags;
             });
             
-            var identityConfiguration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile(AppData.IdentitySettingPath)
-                .Build();
-            
             var url = context.Configuration.GetSection("IdentityServerUrl").GetValue<string>("Authority");
-            var currentClient = identityConfiguration.GetSection("CurrentIdentityClient").Get<IdentityClientOption>()!;
+            var currentClient = context.Configuration.GetSection("CurrentIdentityClient").Get<IdentityClientOption>()!;
             var scopes = currentClient.Scopes!.ToDictionary(x => x, x => x);
 
             options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme

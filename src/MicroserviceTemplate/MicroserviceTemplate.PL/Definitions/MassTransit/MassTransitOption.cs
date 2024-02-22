@@ -1,4 +1,4 @@
-namespace MicroserviceTemplate.PL.Definitions.Options.Models;
+namespace MicroserviceTemplate.PL.Definitions.MassTransit;
 
 public class MassTransitOption
 {

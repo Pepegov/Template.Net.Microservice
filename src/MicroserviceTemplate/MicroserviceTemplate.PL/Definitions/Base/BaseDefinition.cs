@@ -11,8 +11,8 @@ public class CommonDefinition : ApplicationDefinition
 {
     public override async Task ConfigureApplicationAsync(IDefinitionApplicationContext context)
     {
-        var webContext = context.Parse<WebDefinitionApplicationContext>();
-        webContext.WebApplication.UseHttpsRedirection();
+        var app = context.Parse<WebDefinitionApplicationContext>().WebApplication;
+        app.UseHttpsRedirection();
     }
 
     public override async Task ConfigureServicesAsync(IDefinitionServiceContext context)

@@ -22,13 +22,13 @@ try
     
     //Add definitions
     var assembly = typeof(Program).Assembly;
-    builder.AddApplicationDefinitions(assembly);
+    await builder.AddApplicationDefinitions(assembly);
 
     //Create web application
     var app = builder.Build();
     
     //Use definitions
-    app.UseApplicationDefinitions();
+    await app.UseApplicationDefinitions();
     
     //Use logging
     if (app.Environment.IsDevelopment())
@@ -38,7 +38,7 @@ try
     app.UseSerilogRequestLogging();
     
     //Run app
-    app.Run();
+    await app.RunAsync();
 
     return 0;
 }
@@ -55,5 +55,5 @@ catch (Exception ex)
 }
 finally
 {
-    Log.CloseAndFlush();
+    await Log.CloseAndFlushAsync();
 }

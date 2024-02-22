@@ -15,7 +15,7 @@ public class ClaimsEndPoint : ApplicationDefinition
     public override async Task ConfigureApplicationAsync(IDefinitionApplicationContext context)
     {
         var webContext = context.Parse<WebDefinitionApplicationContext>();
-        webContext.WebApplication.MapGet("~/api/claims/get", GetClaims).WithOpenApi();
+        webContext.WebApplication.MapGet("~/api/current/claims/", GetClaims).WithOpenApi();
     }
     
     [ProducesResponseType(200)]
