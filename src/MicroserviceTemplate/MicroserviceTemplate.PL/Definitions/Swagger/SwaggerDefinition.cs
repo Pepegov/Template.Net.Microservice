@@ -85,7 +85,7 @@ public class SwaggerDefinition : ApplicationDefinition
                 .AddJsonFile(AppData.IdentitySettingPath)
                 .Build();
             
-            var url = identityConfiguration.GetSection("IdentityServerUrl").GetValue<string>("Authority");
+            var url = context.Configuration.GetSection("IdentityServerUrl").GetValue<string>("Authority");
             var currentClient = identityConfiguration.GetSection("CurrentIdentityClient").Get<IdentityClientOption>()!;
             var scopes = currentClient.Scopes!.ToDictionary(x => x, x => x);
 

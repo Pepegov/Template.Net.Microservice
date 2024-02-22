@@ -19,13 +19,8 @@ public class AuthorizationDefinition : ApplicationDefinition
 {
     public override async Task ConfigureServicesAsync(IDefinitionServiceContext context)
     {
-        var identityConfiguration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile(AppData.IdentitySettingPath)
-            .Build();
-        
-        var url = identityConfiguration.GetSection("IdentityServerUrl").GetValue<string>("Authority");
-        var currentClient = identityConfiguration.GetSection("CurrentIdentityClient").Get<IdentityClientOption>()!;
+        var url = context.Configuration.GetSection("IdentityServerUrl").GetValue<string>("Authority");
+        var currentClient = context.Configuration.GetSection("CurrentIdentityClient").Get<IdentityClientOption>()!;
         
         context.ServiceCollection
             .AddAuthentication(options =>
