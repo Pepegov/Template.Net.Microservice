@@ -2,13 +2,13 @@
     "$schema": "http://json.schemastore.org/template",
     "author": "Pepegov",
     "classifications": [ "Common", "Web" ],
-    "identity": "Template.Microservice",
-    "name": "Microservice Template",
-    "shortName": "microservice",
+    "identity": "Template.Net.Microservice.ThreeTier",
+    "name": "Microservice Three Tier Template",
+    "shortName": "microservice three tier",
     "tags": {
       "language": "C#",
       "type": "project"
     },
-    "sourceName": "Template.Net.Microservice",
+    "sourceName": "Template.Net.Microservice.ThreeTier",
     "preferNameDirectory": true
 }
