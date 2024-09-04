@@ -22,7 +22,7 @@ public class AutoMapperDefinition : ApplicationDefinition
         var webContext = context.Parse<WebDefinitionApplicationContext>();
         
         var mapper = webContext.ServiceProvider.GetRequiredService<AutoMapper.IConfigurationProvider>();
-        if (webContext.WebApplication.Environment.IsDevelopment())
+        if (webContext.WebApplication.Environment.IsDevelopment() || webContext.WebApplication.Environment.EnvironmentName == "Local")
         {
             mapper.AssertConfigurationIsValid();
         }
