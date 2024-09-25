@@ -31,7 +31,7 @@ try
     await app.UseApplicationDefinitions();
     
     //Use logging
-    if (app.Environment.IsDevelopment())
+    if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local")
     {
         IdentityModelEventSource.ShowPII = true;
     }
