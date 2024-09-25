@@ -1,4 +1,5 @@
 using Template.Net.Microservice.DDD.Application;
+using Template.Net.Microservice.DDD.Application.Database;
 using Template.Net.Microservice.DDD.Infrastructure.Database;
 
 namespace Template.Net.Microservice.DDD.UI.Api.Definitions.Database;
