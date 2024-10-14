@@ -11,7 +11,8 @@ public class MediatorDefinition : ApplicationDefinition
     /// <inheritdoc />
     public override Task ConfigureServicesAsync(IDefinitionServiceContext context)
     {
-        context.ServiceCollection.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+        context.ServiceCollection.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
         return base.ConfigureServicesAsync(context);
     }
 }

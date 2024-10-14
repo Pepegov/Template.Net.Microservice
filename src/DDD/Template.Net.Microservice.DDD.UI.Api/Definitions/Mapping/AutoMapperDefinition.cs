@@ -12,7 +12,8 @@ public class AutoMapperDefinition : ApplicationDefinition
     /// <inheritdoc />
     public override Task ConfigureServicesAsync(IDefinitionServiceContext context)
     {
-        context.ServiceCollection.AddAutoMapper(typeof(Program));
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+        context.ServiceCollection.AddAutoMapper(assemblies);
         return base.ConfigureServicesAsync(context);
     }
 

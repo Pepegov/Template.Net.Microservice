@@ -12,6 +12,7 @@
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="13.0.1" />
+      <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.5" />
       <PackageReference Include="MediatR" Version="12.4.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
         <PrivateAssets>all</PrivateAssets>

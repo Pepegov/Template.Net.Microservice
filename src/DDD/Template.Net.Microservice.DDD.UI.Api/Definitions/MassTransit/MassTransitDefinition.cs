@@ -3,6 +3,7 @@ using MassTransit;
 using Pepegov.MicroserviceFramework.Definition;
 using Pepegov.MicroserviceFramework.Definition.Context;
 using Pepegov.MicroserviceFramework.Exceptions;
+using Template.Net.Microservice.DDD.Application.Consumers;
 using Template.Net.Microservice.ThreeTier.PL.Definitions.MassTransit;
 
 namespace Template.Net.Microservice.DDD.UI.Api.Definitions.MassTransit;
@@ -23,7 +24,7 @@ public class MassTransitDefinition : ApplicationDefinition
             x.SetKebabCaseEndpointNameFormatter();
             x.SetInMemorySagaRepositoryProvider();
             
-            var assembly = Assembly.GetEntryAssembly();
+            var assembly = typeof(OrderCreateCommandConsumer).Assembly;
             var setting = definitionContext.Configuration.GetSection("RabbitMQ").Get<MassTransitOption>();
             if (setting is null)
             {
