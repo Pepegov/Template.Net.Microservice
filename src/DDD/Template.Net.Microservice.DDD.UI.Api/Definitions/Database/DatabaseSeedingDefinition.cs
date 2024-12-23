@@ -11,7 +11,7 @@ public class DatabaseSeedingDefinition : ApplicationDefinition
     /// <inheritdoc />
     public override Task ConfigureServicesAsync(IDefinitionServiceContext context)
     {
-        context.ServiceCollection.AddHostedService<DatabaseSeedingWorker>();
+        //context.ServiceCollection.AddHostedService<DatabaseSeedingWorker>();
         return base.ConfigureServicesAsync(context);
     }
 }

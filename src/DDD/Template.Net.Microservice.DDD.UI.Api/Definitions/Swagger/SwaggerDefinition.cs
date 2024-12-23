@@ -27,6 +27,7 @@ public class SwaggerDefinition : ApplicationDefinition
         webContext.WebApplication.UseSwagger();
         webContext.WebApplication.UseSwaggerUI(settings =>
         {
+            settings.InjectStylesheet("/swagger/dark-theme.css");
             settings.DefaultModelExpandDepth(0);
             settings.DefaultModelRendering(ModelRendering.Model);
             settings.DefaultModelsExpandDepth(0);

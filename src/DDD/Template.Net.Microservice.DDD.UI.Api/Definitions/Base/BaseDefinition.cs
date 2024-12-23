@@ -13,6 +13,7 @@ public class CommonDefinition : ApplicationDefinition
     public override Task ConfigureApplicationAsync(IDefinitionApplicationContext context)
     {
         var app = context.Parse<WebDefinitionApplicationContext>().WebApplication;
+        app.UseStaticFiles();
         app.UseHttpsRedirection();
 
         return base.ConfigureApplicationAsync(context);
