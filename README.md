@@ -2,14 +2,6 @@
 
 This project allows you to quickly start developing a microservice application
 
-The template idea was taken from [Calabonga](https://github.com/Calabonga/Microservice-Template)
-
-<br>
-
----
-
-<br>
-
 ## How to install template
 
 To install a template for your device via dotnet:
@@ -29,10 +21,10 @@ You can also reinstall the template if it was installed earlier
 dotnet new install --force .
 ```
 
-To install a template for your device via dotnet:
+To install a template for your device via rider:
 
 1. Go to File => New Solution... => More Templates => Install Template...
-2. Select folder with .sln file (MicroserviceExtension/src/MicroserviceTemplate)
+2. Select folder with .sln file
 
 <br>
 
@@ -43,8 +35,6 @@ To install a template for your device via dotnet:
 ## Structure
 
 The project presents several microservices templates. You can find out about them below
-
-### Domain Driven Design
 
 ```
 Template.Net.Microservice.DDD
@@ -101,55 +91,6 @@ Template.Net.Microservice.DDD
    - Services: Infrastructure services such as services for working with external APIs, file system, etc.
    - ...other: Various interfaces and common code practices
 
-### Three-Tier
-
-```
-Template.Net.Microservice.ThreeTier
-├── src
-│   ├── Template.Net.Microservice.ThreeTier.BL
-│   │   ├── Services
-│   │   └── ...other
-│   ├── Template.Net.Microservice.ThreeTier.DAL
-│   │   ├── Database
-│   │   ├── Entityes
-│   │   ├── ViewModel
-│   │   ├── Options
-│   │   ├── Mapper
-│   │   └── Domain
-│   └── Template.Net.Microservice.ThreeTier.PL.Api
-│       ├── EndPoints
-│       ├── Definitions
-│       ├── Models
-│       └── Startup.cs
-```
-
-1. PL.Api (Presentation Layer. Api):
-
-   - EndPoints: endpoints. A complete description of the domain with viewmodels, requests, handlers and various api
-
-   - Definitions: A simple implementation of the "vertical slice architecture"
-
-2. DAL (Data Access Layer):
-
-   - Database: Database Integration and sidding
-
-   - Entities: Database Entities
-
-   - ViewModels:  Description of both the representation models and the rest of the Dto
-
-   - Options: Models of the Options pattern
-
-   - Mapper: General mapping and applications
-
-   - Domain: General information about the application, such as name, version, authorization
-
-3. BL (Bussines Layer)
-
-   - Services: Infrastructure services such as services for working with external APIs, file system, etc.
-   - ...other: Various interfaces and common code practices
-
-
-
 <br>
 
 ---
@@ -157,6 +98,14 @@ Template.Net.Microservice.ThreeTier
 <br>
 
 ## Configuration
+
+### TODO
+
+1. Change the db provider in **DatabaseDefinition** to the one you will use. By default, postgres.
+
+2. If you need a message queue, then enable **MassTransitDefinition**.
+
+3. If you are not going to use migrations, then comment out GetPendingMigrations and uncomment EnsureCreated in **DatabaseInitializer**.
 
 ### APPSETTING.JSON & APPSETTING.JSON.DEVELOPER 
 
