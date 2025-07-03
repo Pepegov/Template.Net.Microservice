@@ -20,7 +20,8 @@
         <PackageReference Include="OpenIddict.Server.AspNetCore" Version="5.7.0" />
         <PackageReference Include="OpenIddict.Validation.AspNetCore" Version="5.7.0" />
         <PackageReference Include="OpenIddict.Validation.ServerIntegration" Version="5.7.0" />
-        <PackageReference Include="Pepegov.MicroserviceFramework.AspNetCore" Version="2.2.2" />
+        <PackageReference Include="Pepegov.MicroserviceFramework.ApiResults" Version="1.0.7" />
+        <PackageReference Include="Pepegov.MicroserviceFramework.AspNetCore" Version="2.2.4" />
         <PackageReference Include="Serilog" Version="4.0.1" />
         <PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
         <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
